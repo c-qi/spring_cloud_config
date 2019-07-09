@@ -1,1 +1,26 @@
 message: 'dev properties (test v1.0)'
+server:
+  port: 9082
+spring:
+  application:
+    name: server-provider # 指定服务名称为 server-provider
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:  # 指定Eureka服务端的地址，这里为上面定义的Eureka服务端地址
+      defaultZone: http://localhost:8080/eureka/,http://localhost:8081/eureka/
+feign:
+  hystrix:
+    enabled: true # 开启Hystrix
+  compression:  #支持对请求与响应进行GZIP压缩，以减少通信过程中的性能损耗
+    request:
+      enabled: true      # 开启对请求得压缩
+      mime-types: text/xml,application/xml,application/json # 压缩的请求格式
+      min-request-size: 2048                                # 请求压缩的大小下限，只有超过这个大小的请求才会对其进行压缩
+      response:
+        enabled: true
+
+
+# server:
+#    enable-self-preservation: false  # 关闭保护模式
